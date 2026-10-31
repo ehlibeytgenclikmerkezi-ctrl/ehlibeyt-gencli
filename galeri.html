@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fotoğraf Galerisi - Ehlibeyt Gençlik Merkezi</title>
+  <style>
+    :root{--green:#12372d;--green2:#1d5141;--mint:#eaf2ec;--gold:#d8b66c;--ink:#17251f;--muted:#617068;--white:#fff;--line:#dce6de}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:var(--ink);background:#fbfcfa;line-height:1.6}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+    header{position:sticky;top:0;z-index:10;background:rgba(18,55,45,.97);color:white;border-bottom:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px)}
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}
+    .logo{width:42px;height:42px;border:1px solid var(--gold);border-radius:14px;display:grid;place-items:center;color:var(--gold);font-size:22px}
+    .brand small{display:block;font-size:10px;letter-spacing:.15em;color:#cbd9d0;font-weight:600}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:10px 16px;font-weight:750;font-size:13px;transition:.2s;border:1px solid transparent;cursor:pointer}
+    .btn:hover{transform:translateY(-2px)}.primary{background:var(--gold);color:#172b21}.outline{border-color:#779688;color:white}
+    
+    .page-header{background:radial-gradient(ellipse at 80% 20%,#2b6550 0,transparent 38%),linear-gradient(135deg,#102d25,#174738);color:white;padding:50px 0;text-align:center}
+    .page-header h1{font-size:clamp(32px,4vw,48px);margin:10px 0 0}
+    .page-header p{color:#dce9e0;margin:10px 0 0}
+
+    section{padding:50px 0}
+    .albums-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+    .album-card{background:white;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 8px 28px rgba(23,50,36,.035);cursor:pointer;transition:.3s}
+    .album-card:hover{transform:translateY(-5px);box-shadow:0 12px 35px rgba(23,50,36,.1)}
+    .album-thumb{height:180px;position:relative;overflow:hidden}
+    .album-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .album-info{padding:20px}
+    .album-info h3{margin:0 0 5px;font-size:18px;color:var(--green)}
+    .album-info span{font-size:12px;color:var(--muted)}
+
+    .view-section{display:none}
+    .view-section.active{display:block}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+    .toolbar h2{margin:0;color:var(--green);font-size:24px}
+    
+    .photos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .photo-item{height:180px;border-radius:14px;overflow:hidden;border:1px solid var(--line);cursor:pointer;transition:.2s}
+    .photo-item:hover{transform:scale(1.02)}
+    .photo-item img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:90%;max-height:90vh;border-radius:12px;object-fit:contain}
+    .lightbox-close{position:absolute;top:20px;right:25px;color:white;font-size:32px;background:none;border:none;cursor:pointer}
+
+    footer{background:#0b211b;color:#b8c9bf;padding:22px 0;font-size:12px;margin-top:40px}
+    .footer-row{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="logo">✦</span><span>EHLİBEYT GENÇLİK MERKEZİ<small>FOTOĞRAF GALERİSİ</small></span>
+    </a>
+    <div>
+      <a class="btn outline" href="index.html">← Ana Sayfaya Dön</a>
+    </div>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="wrap">
+    <span style="color:var(--gold);font-weight:700;font-size:12px;letter-spacing:.15em;text-transform:uppercase">Anılarımız & Kareler</span>
+    <h1>Merkezimizden Albümler</h1>
+    <p>Etkinliklerimizden, buluşmalarımızdan ve gezilerimizden en güzel anlar.</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <section id="albumsView" class="view-section active">
+    <div class="albums-grid">
+      <div class="album-card" onclick="openAlbum('gencuklugu')">
+        <div class="album-thumb"><img src="images/gorsellli.jpg" alt="Gençlik Buluşması"></div>
+        <div class="album-info"><h3>Gençlik Buluşması</h3><span>4 Fotoğraf · Ekim 2026</span></div>
+      </div>
+      <div class="album-card" onclick="openAlbum('turnuvalar')">
+        <div class="album-thumb"><img src="images/gorsellllerı.jpg" alt="Turnuvalar"></div>
+        <div class="album-info"><h3>Turnuvalar & Yarışmalar</h3><span>2 Fotoğraf · Eylül 2026</span></div>
+      </div>
+      <div class="album-card" onclick="openAlbum('sohbetler')">
+        <div class="album-thumb"><img src="images/gorsellli.jpg" alt="Sohbetler"></div>
+        <div class="album-info"><h3>Sohbetler & Eğitimler</h3><span>2 Fotoğraf · Ekim 2026</span></div>
+      </div>
+      <div class="album-card" onclick="openAlbum('geziler')">
+        <div class="album-thumb"><img src="images/gorsellllerı.jpg" alt="Geziler"></div>
+        <div class="album-info"><h3>Kültür Gezileri</h3><span>2 Fotoğraf · Ağustos 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photosView" class="view-section">
+    <div class="toolbar">
+      <h2 id="albumTitle">Albüm Adı</h2>
+      <button class="btn primary" onclick="backToAlbums()">← Albümlere Dön</button>
+    </div>
+    <div class="photos-grid" id="photosGrid"></div>
+  </section>
+</main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">&times;</button>
+  <img id="lightboxImg" src="" alt="Büyük Boyutlu Görsel">
+</div>
+
+<footer><div class="wrap footer-row"><span>© <span id="year"></span> Ehlibeyt Gençlik Merkezi</span><span>Öğren · Geliş · Paylaş</span></div></footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const albumData = {
+    gencuklugu: { title: "Gençlik Buluşması Albümü", photos: ["images/gorsellli.jpg", "images/gorsellllerı.jpg", "images/gorsellli.jpg", "images/gorsellllerı.jpg"] },
+    turnuvalar: { title: "Turnuvalar & Yarışmalar Albümü", photos: ["images/gorsellllerı.jpg", "images/gorsellli.jpg"] },
+    sohbetler: { title: "Sohbetler & Eğitimler Albümü", photos: ["images/gorsellli.jpg", "images/gorsellllerı.jpg"] },
+    geziler: { title: "Kültür Gezileri Albümü", photos: ["images/gorsellllerı.jpg", "images/gorsellli.jpg"] }
+  };
+  function openAlbum(albumKey) {
+    const album = albumData[albumKey];
+    if (!album) return;
+    document.getElementById('albumTitle').textContent = album.title;
+    const grid = document.getElementById('photosGrid');
+    grid.innerHTML = '';
+    album.photos.forEach(src => {
+      const div = document.createElement('div');
+      div.className = 'photo-item';
+      div.onclick = () => openLightbox(src);
+      div.innerHTML = `<img src="${src}" alt="Etkinlik Fotoğrafı">`;
+      grid.appendChild(div);
+    });
+    document.getElementById('albumsView').classList.remove('active');
+    document.getElementById('photosView').classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  function backToAlbums() {
+    document.getElementById('photosView').classList.remove('active');
+    document.getElementById('albumsView').classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+</script>
+</body>
+</html>
