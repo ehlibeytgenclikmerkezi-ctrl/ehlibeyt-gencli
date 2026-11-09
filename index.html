@@ -27,6 +27,7 @@
     .checklist{list-style:none;padding:0;margin:20px 0;display:grid;gap:10px}.checklist li:before{content:"✓";color:var(--green2);font-weight:900;margin-right:10px}
     .events{background:white}.event-card{display:flex;gap:18px;align-items:flex-start}.event-date{min-width:58px;padding:10px 8px;background:var(--mint);border-radius:13px;text-align:center;color:var(--green);font-weight:800;font-size:11px}.event-date b{display:block;font-size:23px;line-height:1.1}.event-card h3{margin:0 0 5px;font-size:17px}.event-card p{margin:0;color:var(--muted);font-size:13px}.tag{display:inline-block;margin-top:9px;padding:4px 8px;border-radius:100px;background:#f6f0df;color:#755c22;font-size:10px;font-weight:800}
     .media{background:#f6f8f5}.media-panel{background:var(--green);border-radius:24px;padding:34px;color:white;display:flex;justify-content:space-between;align-items:center;gap:25px}.media-panel h2{margin:0 0 8px;font-size:clamp(26px,3vw,36px);line-height:1.1}.media-panel p{margin:0;color:#d4e2d9;max-width:570px;font-size:14px}
+    .feedback{background:var(--mint)}.feedback-frame{width:100%;height:1050px;border:0;border-radius:16px;background:white;box-shadow:0 8px 28px rgba(23,50,36,.06)}.feedback-note{color:var(--muted);font-size:14px;margin-top:12px}
     .contact{background:#102d25;color:white}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}.contact h2{font-size:clamp(32px,4vw,46px);line-height:1.05;margin:12px 0}.contact p{color:#d1e0d6}.contact-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:24px;border-radius:20px}.contact-line{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.13)}.contact-line:last-child{border:0}.contact-line small{display:block;color:#b9cec2;font-size:11px;text-transform:uppercase;letter-spacing:.1em}.contact-line strong,.contact-line a{display:block;margin-top:3px;color:white}
     footer{background:#0b211b;color:#b8c9bf;padding:22px 0;font-size:12px}.footer-row{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
     @media(max-width:800px){.links{display:none;position:absolute;top:76px;left:0;right:0;background:var(--green);padding:18px 24px 24px;flex-direction:column;align-items:flex-start}.links.open{display:flex}.menu{display:block}.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.strip-grid{grid-template-columns:1fr;gap:14px}.cards{grid-template-columns:1fr 1fr}.media-panel{align-items:flex-start;flex-direction:column}.support-grid{grid-template-columns:1fr}section{padding:58px 0}}
@@ -44,6 +45,7 @@
       <a href="#hakkimizda">Biz Kimiz?</a>
       <a href="#etkinlikler">Etkinlikler</a>
       <a href="galeri.html" style="color: var(--gold); font-weight: bold;">📷 Fotoğraf Galerisi</a>
+      <a href="#geri-bildirim">Şikâyet & Öneri</a>
       <a href="#iletisim">İletişim</a>
     </nav>
   </div>
@@ -108,6 +110,14 @@
       </div>
     </div>
   </section>
+<section class="feedback" id="geri-bildirim">
+    <div class="wrap">
+      <div class="section-head"><span class="kicker">Görüşlerin Bizim İçin Değerli</span><h2>Şikâyet Et – Öneri Sun</h2><p>Merkezimizi daha iyi hâle getirmek için görüşlerini bizimle paylaş. İsim alanı isteğe bağlıdır.</p></div>
+      <iframe class="feedback-frame" src="https://docs.google.com/forms/d/e/1FAIpQLScuy-x3PvSl5oVoLumFJT6KHHZzte7CcqdShmd_DT2QhUnbnQ/viewform?embedded=true" title="Ehlibeyt Gençlik Merkezi Şikâyet ve Öneri Formu" loading="lazy">Yükleniyor…</iframe>
+      <p class="feedback-note">Form açılmazsa <a href="https://docs.google.com/forms/d/e/1FAIpQLScuy-x3PvSl5oVoLumFJT6KHHZzte7CcqdShmd_DT2QhUnbnQ/viewform" target="_blank" rel="noopener" style="color:var(--green2);font-weight:800;text-decoration:underline">buraya dokunarak ayrı sayfada açabilirsin.</a></p>
+    </div>
+  </section>
+
 <section class="contact" id="iletisim">
     <div class="wrap contact-grid">
       <div>
