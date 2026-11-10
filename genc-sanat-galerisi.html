@@ -1,38 +1,300 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ehlibeyt Gençlik Merkezi Genç Sanat Galerisi">
-<title>Genç Sanat Galerisi | Ehlibeyt Gençlik Merkezi</title>
-<style>
-:root{--navy:#142b49;--gold:#f2b544;--cream:#fbf8f1;--ink:#172235;--muted:#687386;--line:#e8e4dc}
-*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--cream);font-family:Arial,Helvetica,sans-serif}a{color:inherit}
-.topbar{background:var(--navy);color:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.brand{font-weight:800;line-height:1.25}.brand small{display:block;color:#d9e3ef;font-weight:500}.topbar a{text-decoration:none;border:1px solid #7890aa;border-radius:999px;padding:9px 15px;font-size:14px}
-.hero{padding:54px 20px 48px;text-align:center;color:white;background:linear-gradient(115deg,rgba(13,34,59,.94),rgba(31,66,102,.82)),radial-gradient(circle at 15% 20%,#55789b,transparent 40%)}.hero .eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px}h1{margin:12px 0;font-size:clamp(34px,6vw,56px)}.hero p{margin:0 auto;max-width:650px;color:#edf2f8;line-height:1.6}
-main{width:min(1120px,92%);margin:34px auto 64px}.intro{text-align:center;max-width:720px;margin:0 auto 28px;line-height:1.65;color:var(--muted)}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:24px 0}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{border:1px solid var(--line);background:white;color:var(--navy);border-radius:999px;padding:9px 15px;cursor:pointer;font-weight:700}.filter.active{background:var(--navy);color:white;border-color:var(--navy)}.search{min-width:min(100%,230px);border:1px solid var(--line);background:white;border-radius:999px;padding:11px 15px;font-size:14px}
-.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.art-card{background:white;border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:0 7px 22px rgba(20,43,73,.07)}.art-card[hidden]{display:none}.art-image{display:block;width:100%;height:245px;object-fit:cover;background:#e9e4d9}.art-info{padding:16px}.meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;margin-bottom:10px}.category{display:inline-block;color:#815a12;background:#fff3d8;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;margin-bottom:9px}.art-info h2{margin:0 0 7px;font-size:19px;color:var(--navy)}.student{margin:0 0 9px;font-size:13px;font-weight:700}.caption{margin:0;color:var(--muted);line-height:1.5;font-size:14px}.empty{display:none;text-align:center;color:var(--muted);padding:35px 10px}.note{margin-top:34px;padding:17px 20px;border-left:4px solid var(--gold);background:#fff;border-radius:10px;color:var(--muted);line-height:1.6;font-size:13px}footer{background:var(--navy);color:#eaf0f6;text-align:center;padding:22px 15px;font-size:13px}
-@media(max-width:800px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:540px){.gallery{grid-template-columns:1fr}.art-image{height:230px}.toolbar{align-items:stretch}.search{width:100%}.hero{padding:42px 18px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ehlibeyt Gençlik Merkezi Genç Sanat Galerisi">
+  <title>Genç Sanat Galerisi | Ehlibeyt Gençlik Merkezi</title>
+  <style>
+    :root {
+      --navy: #142b49;
+      --blue: #244d78;
+      --gold: #f2b544;
+      --cream: #fbf8f1;
+      --ink: #172235;
+      --muted: #687386;
+      --white: #fff;
+      --line: #e8e4dc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    a { color: inherit; }
+    .topbar {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .brand { font-weight: 800; line-height: 1.25; }
+    .brand small { display: block; color: #d9e3ef; font-weight: 500; }
+    .topbar a {
+      text-decoration: none;
+      border: 1px solid #7890aa;
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-size: 14px;
+    }
+    .hero {
+      padding: 54px 20px 48px;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(115deg, rgba(13,34,59,.94), rgba(31,66,102,.82)),
+        radial-gradient(circle at 15% 20%, #55789b, transparent 40%);
+    }
+    .hero .eyebrow {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    h1 { margin: 12px 0; font-size: clamp(34px, 6vw, 56px); }
+    .hero p { margin: 0 auto; max-width: 650px; color: #edf2f8; line-height: 1.6; }
+    main { width: min(1120px, 92%); margin: 34px auto 64px; }
+    .intro {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--navy);
+      border-radius: 999px;
+      padding: 9px 15px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .filter.active { background: var(--navy); color: white; border-color: var(--navy); }
+    .search {
+      min-width: min(100%, 230px);
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 999px;
+      padding: 11px 15px;
+      font-size: 14px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .art-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      overflow: hidden;
+      box-shadow: 0 7px 22px rgba(20,43,73,.07);
+    }
+    .art-card[hidden] { display: none; }
+    .art-image {
+      display: block;
+      width: 100%;
+      height: 245px;
+      object-fit: cover;
+      background: #e9e4d9;
+    }
+    .art-info { padding: 16px; }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .category {
+      display: inline-block;
+      color: #815a12;
+      background: #fff3d8;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    .art-info h2 { margin: 0 0 7px; font-size: 19px; color: var(--navy); }
+    .student { margin: 0 0 9px; font-size: 13px; font-weight: 700; }
+    .caption { margin: 0; color: var(--muted); line-height: 1.5; font-size: 14px; }
+    .empty {
+      display: none;
+      text-align: center;
+      color: var(--muted);
+      padding: 35px 10px;
+    }
+    .note {
+      margin-top: 34px;
+      padding: 17px 20px;
+      border-left: 4px solid var(--gold);
+      background: #fff;
+      border-radius: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+    footer {
+      background: var(--navy);
+      color: #eaf0f6;
+      text-align: center;
+      padding: 22px 15px;
+      font-size: 13px;
+    }
+    @media (max-width: 800px) {
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 540px) {
+      .gallery { grid-template-columns: 1fr; }
+      .art-image { height: 230px; }
+      .toolbar { align-items: stretch; }
+      .search { width: 100%; }
+      .hero { padding: 42px 18px; }
+    }
+  </style>
 </head>
 <body>
-<header class="topbar"><div class="brand">EHLİBEYT GENÇLİK MERKEZİ<small>Genç Sanat Galerisi</small></div><a href="index.html">← Ana Sayfaya Dön</a></header>
-<section class="hero"><div class="eyebrow">Hayal et · Üret · Paylaş</div><h1>Genç Sanat Galerisi</h1><p>Gençlerimizin el emeği eserleri, hayal güçleri ve emekleriyle burada buluşuyor.</p></section>
-<main>
-<p class="intro">Resimden el sanatlarına, maketlerden tasarımlara… Gençlerimizin hazırladığı eserleri keşfedin.</p>
-<div class="toolbar"><div class="filters" aria-label="Eser kategorileri"><button class="filter active" type="button" data-filter="all">Tümü</button><button class="filter" type="button" data-filter="Resim">Resim</button><button class="filter" type="button" data-filter="El Sanatları">El Sanatları</button><button class="filter" type="button" data-filter="Tasarım">Tasarım</button><button class="filter" type="button" data-filter="Diğer">Diğer</button></div><input class="search" id="searchInput" type="search" placeholder="Eser veya öğrenci ara..." aria-label="Galeride ara"></div>
-<section class="gallery" id="gallery" aria-label="Öğrenci eserleri">
-<!-- Yeni eser eklerken kartı kopyalayın; fotoğrafı images/sanat/ klasörüne yükleyin. -->
-<article class="art-card" data-category="Resim"><img class="art-image" src="resimler/sanat/ornek-resim.jpg" alt="Örnek manzara resmi" loading="lazy"><div class="art-info"><div class="meta"><span>10.11.2026</span><span>Resim</span></div><span class="category">Resim</span><h2>Gün Batımı</h2><p class="student">Öğrenci: Öğrenci Adı</p><p class="caption">Renklerin buluştuğu huzurlu bir manzara.</p></div></article>
-<article class="art-card" data-category="El Sanatları"><img class="art-image" src="resimler/sanat/ornek-el-sanatlari.jpg" alt="Örnek el işi çalışması" loading="lazy"><div class="art-info"><div class="meta"><span>10.11.2026</span><span>El Sanatları</span></div><span class="category">El Sanatları</span><h2>Renkli Hayaller</h2><p class="student">Öğrenci: Öğrenci Adı</p><p class="caption">Sabırla işlendi, sevgiyle tamamlandı.</p></div></article>
-<article class="art-card" data-category="Tasarım"><img class="art-image" src="resimler/sanat/ornek-tasarim.jpg" alt="Örnek tasarım çalışması" loading="lazy"><div class="art-info"><div class="meta"><span>10.11.2026</span><span>Tasarım</span></div><span class="category">Tasarım</span><h2>Hayalimdeki Ev</h2><p class="student">Öğrenci: Öğrenci Adı</p><p class="caption">Küçük bir fikir, büyük bir emek.</p></div></article>
-</section>
-<p class="empty" id="emptyMessage">Aramanızla eşleşen eser bulunamadı.</p>
-<div class="note"><strong>Yayın ilkesi:</strong> Eserler öğretmen kontrolünden ve gerekli veli/öğrenci izinleri alındıktan sonra yayımlanır. Öğrencilerin kişisel bilgileri ve iletişim bilgileri galeride paylaşılmaz.</div>
-</main><footer>© Ehlibeyt Gençlik Merkezi · Genç Sanat Galerisi</footer>
-<script>
-const filterButtons=document.querySelectorAll(".filter"),cards=document.querySelectorAll(".art-card"),searchInput=document.getElementById("searchInput"),emptyMessage=document.getElementById("emptyMessage");let activeFilter="all";
-function updateGallery(){const searchText=searchInput.value.trim().toLocaleLowerCase("tr-TR");let visibleCount=0;cards.forEach(card=>{const matchesCategory=activeFilter==="all"||card.dataset.category===activeFilter;const matchesSearch=card.innerText.toLocaleLowerCase("tr-TR").includes(searchText);const show=matchesCategory&&matchesSearch;card.hidden=!show;if(show)visibleCount++});emptyMessage.style.display=visibleCount===0?"block":"none"}
-filterButtons.forEach(button=>button.addEventListener("click",()=>{activeFilter=button.dataset.filter;filterButtons.forEach(item=>item.classList.toggle("active",item===button));updateGallery()}));searchInput.addEventListener("input",updateGallery);
-</script>
-</body></html>
+  <header class="topbar">
+    <div class="brand">
+      EH LİBEYT GENÇLİK MERKEZİ
+      <small>Genç Sanat Galerisi</small>
+    </div>
+    <!-- Ana sayfanızın dosya adı farklıysa href değerini değiştirin. -->
+    <a href="index.html">← Ana Sayfaya Dön</a>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Hayal et · Üret · Paylaş</div>
+    <h1>Genç Sanat Galerisi</h1>
+    <p>Gençlerimizin el emeği eserleri, hayal güçleri ve emekleriyle burada buluşuyor.</p>
+  </section>
+
+  <main>
+    <p class="intro">
+      Resimden el sanatlarına, maketlerden tasarımlara… Gençlerimizin hazırladığı
+      eserleri keşfedin.
+    </p>
+
+    <div class="toolbar">
+      <div class="filters" aria-label="Eser kategorileri">
+        <button class="filter active" type="button" data-filter="all">Tümü</button>
+        <button class="filter" type="button" data-filter="Resim">Resim</button>
+        <button class="filter" type="button" data-filter="El Sanatları">El Sanatları</button>
+        <button class="filter" type="button" data-filter="Tasarım">Tasarım</button>
+        <button class="filter" type="button" data-filter="Diğer">Diğer</button>
+      </div>
+      <input class="search" id="searchInput" type="search" placeholder="Eser veya öğrenci ara..." aria-label="Galeride ara">
+    </div>
+
+    <section class="gallery" id="gallery" aria-label="Öğrenci eserleri">
+
+      <!-- YENİ ESER EKLEME:
+           1) Fotoğrafı GitHub deposunda resimler/sanat/ klasörüne yükleyin.
+           2) Aşağıdaki kartı kopyalayın.
+           3) Görsel yolunu, eser adını, öğrenci adını, tarihi ve açıklamayı değiştirin.
+           4) data-category değeri şu seçeneklerden biri olmalı:
+              Resim, El Sanatları, Tasarım, Diğer
+      -->
+
+      <article class="art-card" data-category="Resim">
+        <img class="art-image" src="resimler/sanat/ornek-resim.jpg" alt="Örnek manzara resmi" loading="lazy">
+        <div class="art-info">
+          <div class="meta"><span>10.11.2026</span><span>Resim</span></div>
+          <span class="category">Resim</span>
+          <h2>Gün Batımı</h2>
+          <p class="student">Öğrenci: Öğrenci Adı</p>
+          <p class="caption">Renklerin buluştuğu huzurlu bir manzara.</p>
+        </div>
+      </article>
+
+      <article class="art-card" data-category="El Sanatları">
+        <img class="art-image" src="resimler/sanat/ornek-el-sanatlari.jpg" alt="Örnek el işi çalışması" loading="lazy">
+        <div class="art-info">
+          <div class="meta"><span>10.11.2026</span><span>El Sanatları</span></div>
+          <span class="category">El Sanatları</span>
+          <h2>Renkli Hayaller</h2>
+          <p class="student">Öğrenci: Öğrenci Adı</p>
+          <p class="caption">Sabırla işlendi, sevgiyle tamamlandı.</p>
+        </div>
+      </article>
+
+      <article class="art-card" data-category="Tasarım">
+        <img class="art-image" src="resimler/sanat/ornek-tasarim.jpg" alt="Örnek tasarım çalışması" loading="lazy">
+        <div class="art-info">
+          <div class="meta"><span>10.11.2026</span><span>Tasarım</span></div>
+          <span class="category">Tasarım</span>
+          <h2>Hayalimdeki Ev</h2>
+          <p class="student">Öğrenci: Öğrenci Adı</p>
+          <p class="caption">Küçük bir fikir, büyük bir emek.</p>
+        </div>
+      </article>
+
+    </section>
+
+    <p class="empty" id="emptyMessage">Aramanızla eşleşen eser bulunamadı.</p>
+
+    <div class="note">
+      <strong>Yayın ilkesi:</strong> Eserler öğretmen kontrolünden ve gerekli veli/öğrenci
+      izinleri alındıktan sonra yayımlanır. Öğrencilerin kişisel bilgileri ve iletişim
+      bilgileri galeride paylaşılmaz.
+    </div>
+  </main>
+
+  <footer>© Ehlibeyt Gençlik Merkezi · Genç Sanat Galerisi</footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll(".filter");
+    const cards = document.querySelectorAll(".art-card");
+    const searchInput = document.getElementById("searchInput");
+    const emptyMessage = document.getElementById("emptyMessage");
+    let activeFilter = "all";
+
+    function updateGallery() {
+      const searchText = searchInput.value.trim().toLocaleLowerCase("tr-TR");
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.dataset.category;
+        const content = card.innerText.toLocaleLowerCase("tr-TR");
+        const matchesCategory = activeFilter === "all" || category === activeFilter;
+        const matchesSearch = content.includes(searchText);
+        const show = matchesCategory && matchesSearch;
+
+        card.hidden = !show;
+        if (show) visibleCount++;
+      });
+
+      emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach(item => item.classList.toggle("active", item === button));
+        updateGallery();
+      });
+    });
+
+    searchInput.addEventListener("input", updateGallery);
+  </script>
+</body>
+</html>
