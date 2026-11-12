@@ -32,6 +32,9 @@
 
     .view-section{display:none}
     .view-section.active{display:block}
+    .album-thumb{background:#edf3ee}
+    .album-thumb .cover-label{position:absolute;left:12px;bottom:12px;background:rgba(18,55,45,.88);color:#fff;padding:5px 9px;border-radius:8px;font-size:11px}
+    .empty-state{grid-column:1/-1;text-align:center;padding:36px 18px;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
     .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
     .toolbar h2{margin:0;color:var(--green);font-size:24px}
     
@@ -96,10 +99,17 @@
     </div>
   </section>
 
+  <section id="subAlbumsView" class="view-section">
+    <div class="toolbar">
+      <h2>Atölye Günlükleri</h2>
+      <button class="btn primary" onclick="backToAlbums()">← Ana Albümlere Dön</button>
+    </div>
+    <div class="albums-grid" id="subAlbumsGrid"></div>
+  </section>
   <section id="photosView" class="view-section">
     <div class="toolbar">
       <h2 id="albumTitle">Albüm Adı</h2>
-      <button class="btn primary" onclick="backToAlbums()">← Albümlere Dön</button>
+      <button class="btn primary" onclick="backToSubAlbums()">← Atölye Albümlerine Dön</button>
     </div>
     <div class="photos-grid" id="photosGrid"></div>
   </section>
@@ -114,6 +124,11 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  // Kapak fotoğrafları her albümün cover alanından değiştirilebilir.
+  const workshopAlbums = {
+    manti: { title: "Mantı Etkinliği", cover: "WhatsApp%20Image%202026-11-07%20at%208.33.40%20PM.jpeg", photos: [] },
+    diger: { title: "Diğer Atölyeler", cover: "WhatsApp%20Image%202026-11-07%20at%208.33.40%20PM.jpeg", photos: ["WhatsApp%20Image%202026-11-07%20at%208.32.58%20PM%20(1).jpeg", "WhatsApp%20Image%202026-11-07%20at%208.33.40%20PM.jpeg"] }
+  };
   const albumData = {
     gencuklugu: { title: "Gençlik Buluşması Albümü", photos: ["images/gorsellli.jpg", "images/gorsellllerı.jpg"] },
     turnuvalar: { title: "Turnuvalar & Yarışmalar Albümü", photos: ["images/gorsellllerı.jpg", "images/gorsellli.jpg"] },
@@ -122,6 +137,14 @@
     atolye: { title: "Atölye Günlükleri", photos: ["WhatsApp%20Image%202026-11-07%20at%208.32.58%20PM%20(1).jpeg", "WhatsApp%20Image%202026-11-07%20at%208.33.40%20PM.jpeg"] }
   };
   function openAlbum(albumKey) {
+    if (albumKey === 'atolye') {
+      renderWorkshopAlbums();
+      document.getElementById('albumsView').classList.remove('active');
+      document.getElementById('photosView').classList.remove('active');
+      document.getElementById('subAlbumsView').classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      return;
+    }
     const album = albumData[albumKey];
     if (!album) return;
     document.getElementById('albumTitle').textContent = album.title;
@@ -138,8 +161,49 @@
     document.getElementById('photosView').classList.add('active');
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
+  function renderWorkshopAlbums() {
+    const grid = document.getElementById('subAlbumsGrid');
+    grid.innerHTML = '';
+    Object.entries(workshopAlbums).forEach(([key, album]) => {
+      const card = document.createElement('div');
+      card.className = 'album-card';
+      card.onclick = () => openWorkshopAlbum(key);
+      card.innerHTML = `<div class="album-thumb"><img src="${album.cover}" alt="${album.title} albüm kapağı"><span class="cover-label">Albümü görüntüle</span></div><div class="album-info"><h3>${album.title}</h3><span>${album.photos.length} Fotoğraf</span></div>`;
+      grid.appendChild(card);
+    });
+  }
+  function openWorkshopAlbum(key) {
+    const album = workshopAlbums[key];
+    if (!album) return;
+    document.getElementById('albumTitle').textContent = album.title;
+    const grid = document.getElementById('photosGrid');
+    grid.innerHTML = '';
+    if (!album.photos.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      empty.textContent = 'Bu albüme henüz fotoğraf eklenmedi. Fotoğraflar eklendiğinde burada görüntülenecek.';
+      grid.appendChild(empty);
+    } else {
+      album.photos.forEach(src => {
+        const div = document.createElement('div');
+        div.className = 'photo-item';
+        div.onclick = () => openLightbox(src);
+        div.innerHTML = `<img src="${src}" alt="Etkinlik Fotoğrafı">`;
+        grid.appendChild(div);
+      });
+    }
+    document.getElementById('subAlbumsView').classList.remove('active');
+    document.getElementById('photosView').classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  function backToSubAlbums() {
+    document.getElementById('photosView').classList.remove('active');
+    document.getElementById('subAlbumsView').classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
   function backToAlbums() {
     document.getElementById('photosView').classList.remove('active');
+    document.getElementById('subAlbumsView').classList.remove('active');
     document.getElementById('albumsView').classList.add('active');
     window.scrollTo({top: 0, behavior: 'smooth'});
   }
